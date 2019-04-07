@@ -8,13 +8,15 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def check():
     print "AutoAccess Server Running..."
-    return jsonify({'result': True})
+    return jsonify({'Server status': 'Running...'})
+
 
 @app.route('/light/on', methods=['GET'])
 def lighOn():
     print "Turning Light ON !"
     motorController.light_on()
     return jsonify({'result': True})
+
 
 @app.route('/light/on/interval/<interval>', methods=['GET'])
 def lighOnInterval(interval):
@@ -25,6 +27,7 @@ def lighOnInterval(interval):
     except:
         print "ERROR: Cannot read interval value"
         return jsonify({'result': False})
+
 
 @app.route('/light/off', methods=['GET'])
 def lighOff():
