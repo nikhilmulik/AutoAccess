@@ -5,7 +5,7 @@ from flask import jsonify
 app = Flask(__name__)
 
 
-@app.route('/light/onn', methods=['GET'])
+@app.route('/light/on', methods=['GET'])
 def lighOn():
     print "Turning Light ON !"
     motorController.light_on()
@@ -13,9 +13,13 @@ def lighOn():
 
 @app.route('/light/on/interval/<interval>', methods=['GET'])
 def lighOnInterval(interval):
-    print "Turning Light ON !"
-    motorController.light_interval(interval)
-    return jsonify({'result': True})
+    try:
+        print "Turning Light ON !"
+        motorController.light_interval(int(interval))
+        return jsonify({'result': True})
+    except:
+        print "ERROR: Cannot read interval value"
+        return jsonify({'result': False})
 
 @app.route('/light/off', methods=['GET'])
 def lighOff():
