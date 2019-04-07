@@ -5,6 +5,11 @@ from flask import jsonify
 app = Flask(__name__)
 
 
+@app.route('/', methods=['GET'])
+def check():
+    print "AutoAccess Server Running..."
+    return jsonify({'result': True})
+
 @app.route('/light/on', methods=['GET'])
 def lighOn():
     print "Turning Light ON !"
