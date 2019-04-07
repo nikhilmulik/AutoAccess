@@ -25,7 +25,7 @@ def light_off():
 
 def light_interval(interval):
   t = interval
-  while LIGHT:
+  for i in range(100):
     time.sleep(t)
     GPIO.output(22, True)
     time.sleep(t)
