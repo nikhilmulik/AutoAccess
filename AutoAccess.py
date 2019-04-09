@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import motorController
 from flask import jsonify
 
@@ -8,14 +8,14 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def check():
     print "AutoAccess Server Running..."
-    return jsonify({'Server status': 'Running...'})
+    return render_template('index.html')
 
 
 @app.route('/light/on', methods=['GET'])
 def lighOn():
     print "Turning Light ON !"
-    motorController.light_on()
-    return jsonify({'result': True})
+    result = motorController.light_on()
+    return jsonify({'result': result})
 
 
 @app.route('/light/on/interval/<interval>', methods=['GET'])
